@@ -1,4 +1,5 @@
 # Orga
+Hi :) 
 ## Inhalt der Prüfung
 - Stoff der Vorlesungen
 - Stoff der Praktika
