@@ -135,6 +135,8 @@ Wann braucht ein Roboter ein Umgebungsmodell und wieso muss er sich darin lokali
 - Ein Roboter benötigt ein Umgebungsmodell und muss sich darin lokalisieren, um effektiv und autonom in seiner Umgebung agieren zu können. Dies ist insbesondere in komplexen oder unbekannten Umgebungen wichtig, in denen der Roboter Aufgaben ausführen muss, die eine Interaktion mit der Umgebung erfordern.
 ### Questions II
 Was ist der Unterschied zwischen propriozeptiven und extereozeptiven Sensoren? Nennen Sie jeweils Beispiele!
+- Propriozeptive Sensoren → Eigenwahrnehmung (z. B. Gyroskop, Beschleunigungssensor).
+- Extereozeptive Sensoren → Umweltwahrnehmung (z. B. Kamera, LIDAR, Ultraschallsensor).
 
 Was ist Odometrie?
 - Die Odometrie ist eine Unterklasse (der propriozeptiven, sehr selten der exterozeptiven) Sensoren, die Informationen über die zurückgelegte Wegstrecke liefern.
