@@ -29,7 +29,7 @@ Welche mechanischen Komponenten eines Roboters können unterschieden werden?
 - DOF: Degrees of freedom
 
 Was sind Freiheitsgrade (DOF - degrees of freedom) eines Roboters?
-???
+Die Freiheitsgrade (DOF - Degrees of Freedom) eines Roboters beschreiben die Anzahl der unabhängigen Bewegungsmöglichkeiten, die der Roboter hat. Jeder Freiheitsgrad entspricht einer unabhängigen Achse, entlang der sich der Roboter bewegen oder um die er sich drehen kann.
 
 Was meint der Begriff "autonomes Fahren (AF/AD)"?
 - Abhängig welches Level des autonomen Fahren man betrachtet
