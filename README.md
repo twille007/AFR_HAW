@@ -150,9 +150,15 @@ Was sind weitere Sensoren autonomer Fahrzeuge?
 - Kamera
 - GNSS (global navigation satellite systems)
 - IMU (Inertial Measurement Unit)
+
 ## Kapitel 3
 ### Questions I
+Nennen Sie zwei typische Arten von Gelenken!
+- Drehgelenk (Revolute Joint) (Ermöglicht eine Rotation um eine feste Achse.)
+- Schubgelenk (Prismatic Joint) (Ermöglicht eine lineare Bewegung entlang einer Achse (Translation statt Rotation).)
+
 Was ist eine Standardform zur Beschreibung von Roboterkinematiken?  bzw.: Warum werden Roboter nicht beliebig/wahlfrei entworfen sondern mit bestimmten Einschränkungen?
+- TODO
 
 Was ist der Unterschied zwischen Vorwärts- und inverser Kinematik?
 - Die Vorwärtskinematik ist ein direkter Prozess, bei dem die Ausgangsposition der Gelenke bekannt ist und die Position des Endeffektors berechnet wird.
@@ -174,16 +180,65 @@ Wofür steht SLAM, was ist damit gemeint?
 	- SLAM-Systeme nutzen eine Vielzahl von Sensoren (wie Kameras, LiDAR, Ultraschall, Inertialsensoren) und Algorithmen, um Daten über die Umgebung zu sammeln und zu verarbeiten. Diese Daten werden verwendet, um die Bewegungen des Roboters zu schätzen und gleichzeitig eine Karte der Umgebung zu generieren. Die Herausforderung bei SLAM besteht darin, die Ungewissheit und Ungenauigkeiten zu bewältigen, die mit der Messung und der Bewegung in einer unbekannten Umgebung einhergehen.
 
 ICP und RANSAC können innerhalb von SLAM verwendet werden. Beschreiben Sie beide grob.
+ICP wird hauptsächlich zur genauen Ausrichtung von Punktwolken genutzt, wenn eine gute Annäherung der Transformation existiert. RANSAC wird genutzt, um robuste Modelle trotz Ausreißern zu finden, z. B. zur Entfernung falscher Korrespondenzen in der Merkmalsextraktion.
+
+ICP ist ein iterativer Algorithmus zur Registrierung von Punktwolken, d. h., er versucht, zwei Punktwolken (z. B. aus einem LiDAR-Sensor) möglichst gut aufeinander auszurichten.
+Funktionsweise von ICP:
+- Punktzuordnung: Für jeden Punkt in der Quellpunktwolke wird der nächste Punkt in der Zielpunktwolke gesucht.
+- Transformation berechnen: Die optimale Rotations- und Translationsmatrix wird bestimmt, um die Punktwolken möglichst gut auszurichten.
+- Transformation anwenden: Die Quellpunktwolke wird entsprechend transformiert.
+- Iterationen: Der Prozess wird wiederholt, bis ein Abbruchkriterium (z. B. Konvergenz oder Anzahl der Iterationen) erreicht ist.
+
+RANSAC ist ein robuster Algorithmus zur Schätzung von Modellen in verrauschten Daten, indem er Ausreißer (Outlier) entfernt.
+Funktionsweise von RANSAC:
+- Zufällige Auswahl: Es werden zufällig eine kleine Anzahl von Punkten gewählt, um ein Modell (z. B. eine Gerade oder Transformation) zu schätzen.
+- Konsistenzprüfung: Die restlichen Datenpunkte werden überprüft, ob sie zu diesem Modell passen („Inlier“).
+- Wiederholung: Der Prozess wird mehrmals durchgeführt, bis das beste Modell mit den meisten Inliers gefunden ist.
 
 Beschreiben Sie grob die Idee eines Kalman-Filters!
+Der Kalman-Filter kombiniert zwei Informationsquellen:
+- Vorhersage (Prediction) → Ein Modell sagt voraus, wie sich der Zustand eines Systems entwickeln sollte.
+- Messung (Update/Correction) → Sensoren liefern neue Messwerte, die aber verrauscht sein können.
+
+Durch die geschickte Gewichtung von Modell und Messung wird die beste Schätzung des tatsächlichen Systemzustands berechnet.
 
 Was ist ein Particle Filter? Aus welchen Schritten besteht dessen Berechnung?
+Statt den Zustand eines Systems durch eine einzelne Schätzung oder eine Verteilung (wie beim Kalman-Filter) zu beschreiben, verwendet der Partikelfilter eine Menge von Partikeln (Einzelzustände), um eine Wahrscheinlichkeitsverteilung über mögliche Zustände darzustellen.
+- Jedes Partikel ist eine mögliche Schätzung des Systemzustands.
+- Jedes Partikel hat ein Gewicht, das angibt, wie gut es zur aktuellen Messung passt.
+- Durch iterative Anpassung der Partikel wird der wahre Zustand des Systems angenähert.
+
+Ein Partikelfilter besteht aus vier Hauptschritten, die rekursiv wiederholt werden:
+1. Initialisierung
+   - Eine Menge von NN Partikeln wird zufällig verteilt.
+   - Jeder Partikel repräsentiert einen möglichen Zustand des Systems.
+   - Falls Vorwissen existiert, können die Partikel aus einer Wahrscheinlichkeitsverteilung gezogen werden.
+
+2. Vorhersage (Prediction)
+   - Jedes Partikel wird mit einem dynamischen Modell aktualisiert (z. B. anhand der Bewegungsgleichungen des Roboters).
+   - Modellfehler und Unsicherheiten werden durch zufällige Störungen (z. B. Gaussian Noise) berücksichtigt.
+
+3. Gewichtung (Update)
+   - Die Sensorwerte werden mit den vorhergesagten Partikeln verglichen.
+   - Jedem Partikel wird ein Gewicht basierend auf der Wahrscheinlichkeit zugewiesen, dass es die aktuelle Messung erklärt.
+   - Partikel, die gut zur Messung passen, erhalten ein höheres Gewicht.
+
+4. Resampling (Neuziehung)
+   - Partikel mit hohen Gewichten werden bevorzugt dupliziert.
+   - Partikel mit geringen Gewichten werden verworfen.
+   - Dadurch wird die Verteilung neu fokussiert und schlechte Schätzungen entfernt.
+   - Nach dem Resampling haben alle Partikel wieder das gleiche Gewicht.
+
+Dieser Zyklus wird kontinuierlich wiederholt, um den Zustand zu schätzen.
+
 ### Questions III
 Was ist GMapping, beschreiben Sie es grob! Welches Verfahren wird von GMapping verwendet?
 
 Was ist HectorSLAM? Beschreiben Sie es grob!
 
 Schauen Sie sich den zugehörigen Praktikumszetteln an. Welche Erkenntnisse hatten Sie im Praktikum?
+- TODO
+
 ## Kapitel 4
 ### Questions I
 Was ist "Random Walk"? Wo kann es eingesetzt werden?
