@@ -279,26 +279,84 @@ Nachteile:
 - Landmark-based Maps (Merkmalsbasierte Karten) – Nutzen markante Punkte (Landmarks) wie Verkehrszeichen, Gebäude oder WLAN-Signale zur Orientierung und Navigation ohne vollständige Kartenrekonstruktion.
 
 #### Was sind "HD-Maps"?
+HD-Maps (High-Definition Maps) sind hochpräzise digitale Karten, die speziell für autonomes Fahren und fortschrittliche Fahrerassistenzsysteme (ADAS) entwickelt wurden. Sie enthalten sehr detaillierte Informationen über Straßen, Fahrspuren, Verkehrszeichen, Markierungen und Umgebungselemente mit einer Genauigkeit von Zentimetern.
 
 #### Was ist "Quer-" und "Längsführung"?
+- Die Längsführung beschreibt die Bewegung entlang der Fahrtrichtung, also Beschleunigung, Verzögerung und das Halten einer Geschwindigkeit.
+- Die Querführung steuert die Bewegung seitlich zur Fahrtrichtung, also das Lenken des Fahrzeugs.
 
 ### Questions II
 #### Was ist eine "Ackermann-Lenkung"?
+Die Ackermann-Lenkung ist ein Lenkmechanismus, der dafür sorgt, dass sich die Räder eines Fahrzeugs beim Kurvenfahren auf idealen Kreisbahnen bewegen, ohne zu rutschen oder Schlupf zu erzeugen. Sie wird vor allem in Autos, LKWs und mobilen Robotern mit Rädern verwendet.
+
+1. Problem ohne Ackermann-Lenkung
+- Beim Kurvenfahren bewegen sich die inneren und äußeren Räder auf unterschiedlichen Radien.
+- Ohne Anpassung würden beide Vorderräder den gleichen Lenkwinkel haben → dies führt zu Reibung, Reifenverschleiß und ineffizienter Kurvenfahrt.
+
+2. Lösung durch Ackermann-Geometrie
+- Die Vorderräder werden so ausgerichtet, dass ihre Verlängerungen sich im Mittelpunkt der Kurvenbahn schneiden.
+- Dadurch haben die Räder unterschiedliche Lenkwinkel:
+  - Inneres Rad → stärker eingeschlagen
+  - Äußeres Rad → weniger eingeschlagen
+- Dies wird durch die geometrische Anordnung der Lenkgestänge realisiert.
 
 #### Was ist mit "Pure Pursuit" gemeint?
+Pure Pursuit ist ein geometriebasierter Pfadverfolgungsalgorithmus, der häufig in autonomen Fahrzeugen und mobilen Robotern verwendet wird. Sein Hauptziel ist es, einen glatten, effizienten Pfad zu einem Zielpunkt zu generieren und zu verfolgen.
+- Anstatt direkt einer vordefinierten Trajektorie zu folgen, berechnet der Algorithmus einen dynamischen Zielpunkt auf dem Pfad, der sich mit der Bewegung des Fahrzeugs weiterentwickelt.
+- Das Fahrzeug passt seine Lenkung so an, dass es kontinuierlich auf diesen Punkt zusteuert.
+- Autonomes Fahren (Level 2-4) – Führt Fahrzeuge sanft durch vordefinierte Routen.
+- Er ist besonders gut für glatte, dynamische Steuerung, aber weniger präzise für enge Kurven oder komplexe Umgebungen.
 
 #### Beschreiben Sie kurz ein alternatives Verfahren zu "Pure Pursuit"!
+- Eine alternative Methode zu Pure Pursuit ist der Stanley Controller, der insbesondere von Google/Stanford für autonomes Fahren entwickelt wurde.
+- Statt einen dynamischen Zielpunkt (wie bei Pure Pursuit) zu verfolgen, minimiert der Stanley Controller aktiv den lateralen Fehler zwischen Fahrzeug und Fahrspur.
+- Das Fahrzeug passt die Lenkung so an, dass es sich kontinuierlich zur Fahrspur hin ausrichtet und dabei den Winkel zur Trajektorie verringert.
 
 #### Welche Verfahren zur Kommunikation zwischen Fahrzeugen und zwischen Fahrzeugen und Infrastruktur kennen Sie?
+- Car2X:
+  - Direkte WLAN-basierte Kommunikation ohne Mobilfunknetz.
+  - Fahrzeuge tauschen Position, Geschwindigkeit, Gefahrenwarnungen aus.
+  - Reichweite: 300–1000 Meter (abhängig von Bebauung).
+- 5GAA:
+  - Gegründet von Audi, BMW, Daimler und weiteren Industriepartnern.
+  - Ziel: Entwicklung von 5G-basierten Kommunikationslösungen für V2X-Kommunikation.
+  - Fahrzeuge kommunizieren über Mobilfunk mit Verkehrsmanagementzentralen.
 
 ### Questions III
 #### Was ist der Unterschied zwischen globaler und lokaler Navigation? Was ist mit Hindernisvermeidung gemeint?
+Globale Navigation:
+Ziel: Planung eines gesamten Pfades von Start zu Ziel unter Berücksichtigung einer Umgebungskarte.
+- Arbeitet mit bekannten Karten (z. B. HD-Maps, SLAM-Karten).
+- Berechnet eine optimale Route unter Berücksichtigung von Straßen, Wegen oder Gebäuden.
+- Algorithmen berücksichtigen z. B. Verkehrsfluss, Tempolimits oder Straßensperren.
+
+Lokale Naviation:
+Ziel: Anpassung der Bewegung während der Fahrt, um Hindernisse zu vermeiden und auf dynamische Ereignisse zu reagieren.
+- Nutzt Sensordaten in Echtzeit (LIDAR, Kamera, Ultraschall).
+- Führt kleine Anpassungen der Route durch, um Hindernissen auszuweichen.
+- Funktioniert auch ohne vollständige Karten (nützlich in unbekannten Umgebungen).
+
+Hinternisvermeidung:
+- Das Fahrzeug erkennt statische oder dynamische Hindernisse und passt seine Bewegung an, um eine Kollision zu verhindern.
 
 #### Beschreiben Sie die Pfadplanung mittels Dijkstra oder Greedy Best First Search!
+Während Dijkstra eine exakte Lösung für den kürzesten Weg liefert, versucht GBFS, so schnell wie möglich das Ziel zu erreichen – oft auf Kosten der optimalen Route.
 
-#### Was ist der Unterschied zwischen der Pfadplanung nach Dijkstra und mittels A\*?
+Dijkstra arbeitet nach dem Prinzip der vollständigen Suche und prüft systematisch alle möglichen Wege. Er speichert die kürzesten bekannten Distanzen zu jedem Knoten und wählt immer denjenigen mit der niedrigsten bekannten Distanz zur weiteren Verarbeitung aus. Dadurch garantiert er, dass der gefundene Weg tatsächlich der kürzeste ist. Diese Methode ist jedoch rechenaufwendig, da sie auch viele unwichtige Knoten untersucht.
 
-#### Was ist der Vorteil von D* verglichen mit A\*?
+Im Gegensatz dazu verfolgt Greedy Best First Search einen heuristischen Ansatz und bewertet Knoten nach einer Schätzwert-Funktion – oft die Luftlinienentfernung zum Ziel. Das bedeutet, dass GBFS immer den vielversprechendsten Knoten zuerst wählt, also denjenigen, der sich scheinbar am schnellsten dem Ziel nähert. Dadurch ist der Algorithmus meist deutlich schneller als Dijkstra, da er unnötige Knoten überspringt. Allerdings kann es passieren, dass er in eine Sackgasse gerät oder eine suboptimale Route wählt, da er keine Rücksicht auf alternative kürzere Wege nimmt.
+
+In der Anwendung eignet sich Dijkstra besonders gut für präzise Routenplanung in statischen Umgebungen, beispielsweise für Navigationssysteme in Straßennetzen, bei denen immer der kürzeste Weg gefunden werden soll. Greedy Best First Search hingegen wird oft für Echtzeit-Navigation verwendet, wenn schnelle Entscheidungen wichtiger sind als absolute Genauigkeit – etwa bei Robotersteuerung oder KI-gestützten Spielen.
+
+#### Was ist der Unterschied zwischen der Pfadplanung nach Dijkstra und mittels A* ?
+Dijkstra betrachtet nur die Kosten vom Startpunkt bis zum aktuellen Knoten (g(n)) und sucht somit alle möglichen Wege systematisch durch, bis er den kürzesten gefunden hat. Dadurch kann er viele unnötige Knoten verarbeiten, die nicht direkt zum Ziel führen.
+
+A* verbessert Dijkstra, indem es zusätzlich eine Heuristik (h(n)h(n)) verwendet, die die geschätzte Entfernung zum Ziel einbezieht. Das bedeutet, dass A* gezielt in Richtung des Ziels sucht, anstatt blind das gesamte Gebiet abzusuchen. Dadurch reduziert es die Anzahl der Knoten, die untersucht werden müssen, und ist somit schneller.
+
+#### Was ist der Vorteil von D* verglichen mit A* ?
+Der D\*-Algorithmus (Dynamic A\*) ist eine Erweiterung von A\* und wird speziell für dynamische Umgebungen verwendet. Während A\* einmalig den besten Pfad berechnet, kann D\* den Pfad während der Navigation anpassen, wenn sich die Umgebung verändert.
+- A\* berechnet den Pfad immer von Grund auf neu, wenn sich Hindernisse oder Kosten ändern.
+- D\* merkt sich die vorherige Lösung und aktualisiert nur die betroffenen Bereiche des Pfades, was Rechenzeit spart.
 
 ### Questions IV
 #### Schauen Sie sich den zugehörigen Praktikumszettel an. Welche Erkenntnisse hatten Sie im Praktikum?
