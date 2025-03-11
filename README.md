@@ -22,10 +22,9 @@ Wir können ein/zwei Tage vor Ihrem Prüfungstermin einmal versuchen, schon die 
 - Computer Science
 
 #### Welche mechanischen Komponenten eines Roboters können unterschieden werden?
-- Links
-- Joints
-- Actuators: usually either rotary or linear
-- DOF: Degrees of freedom
+- Links (Glieder)
+- Joints (Gelenke)
+- Actuators (Aktoren): usually either rotary or linear
 
 #### Was sind Freiheitsgrade (DOF - degrees of freedom) eines Roboters?
 Die Freiheitsgrade (DOF - Degrees of Freedom) eines Roboters beschreiben die Anzahl der unabhängigen Bewegungsmöglichkeiten, die der Roboter hat. Jeder Freiheitsgrad entspricht einer unabhängigen Achse, entlang der sich der Roboter bewegen oder um die er sich drehen kann.
@@ -81,15 +80,16 @@ Modelle (insbesondere URDF - Unified Robot Description Format) sind essenziell, 
 - roscore, rostopic, rosnode, etc., um ROS-Befehle über die Konsole einzugeben.
 
 #### Was sind Unterschiede zwischen ROS1 und ROS2?
-	ROS2 wurde von Grund auf neugebaut, um auch Anwendung im kommerziellen Bereich zu finden und sollte deshalb die folgenden Design Voraussetzungen erfüllen:
+ROS2 wurde von Grund auf neugebaut, um auch Anwendung im kommerziellen Bereich zu finden und sollte deshalb die folgenden Design Voraussetzungen erfüllen:
 - Security: Verschlüsselung
 - Embedded systems: Es soll auch auf eingebetteten Systemen laufen
 - Diverse networks: Es soll zwischen verschiedenen Netzwerken kommunizieren können
 - Real-time computing: Es muss Berechnungen in Echtzeit ausführen können
 - Product Readiness: Es muss bestimmte Sicherheits- und Industriestandards erfüllen
+
 ### Questions IV
 #### Womit beschäftigt sich die Regelungstechnik?
-	Die Regelungstheorie untersucht die Steuerung einer Anlage durch einen Regler (Controller).
+Die Regelungstheorie untersucht die Steuerung einer Anlage durch einen Regler (Controller).
 
 #### Ein Controllertyp sind PID-Controller. Wofür stehen P, I und D?
 1. **P - Proportional**: Der proportionale Teil reagiert auf den aktuellen Fehler, der die Differenz zwischen dem gewünschten Sollwert (Setpoint) und dem tatsächlichen Istwert (Messwert) ist. Der proportionale Term berechnet eine Steueraktion, die proportional zu diesem Fehler ist. Das bedeutet, je größer der Fehler, desto größer die Steueraktion. Dies ermöglicht eine schnelle Reaktion auf Änderungen, kann aber zu einem ständigen Über- oder Unterschwingen führen, da der proportionale Term allein den Fehler nicht auf Null reduzieren kann, ohne dass eine gewisse Differenz verbleibt.
@@ -112,12 +112,12 @@ In der Robotik bezieht sich der Begriff "Kinematik" auf die Untersuchung der Bew
 ## Kapitel 2
 ### Questions I
 #### Nennen Sie zwei typische Arten von Gelenken (joints).
-- **Drehgelenke (Rotary Joints oder Revolute Joints):** Diese Gelenktypen erlauben eine Rotationsbewegung um eine einzige Achse.
-- **Schubgelenke (Prismatic Joints):** Schubgelenke ermöglichen eine lineare Bewegung entlang einer Achse.
+- Drehgelenke (Rotary Joints oder Revolute Joints): Diese Gelenktypen erlauben eine Rotationsbewegung um eine einzige Achse.
+- Schubgelenke (Prismatic Joints): Schubgelenke ermöglichen eine lineare Bewegung entlang einer Achse.
 
 #### Welche Stufen von Autonomie können nach SAE J3016 unterschieden werden?
 Level 0 bis Level 5 (6 Level)
-![Alt-Text](Pasted%20image%2020240229171622.png)
+![SAE_J3016](media/SAE_J3016)
 
 #### Welche Programme zur Verkehrssimulation kennen Sie?
 - Gazebo: commonly used with ROS, general 3D simulator incl. physics, no special focus on street env. / vehicles
@@ -260,36 +260,74 @@ Die Kernkomponenten sind:
 
 ## Kapitel 4
 ### Questions I
-Was ist "Random Walk"? Wo kann es eingesetzt werden?
-Was ist "Dead-Reckoning"? Was sind Nachteile dieses Verfahrens?
-Welche Arten von Karten können in der Robotik unterschieden werden?
-Was sind "HD-Maps"?
-Was ist "Quer-" und "Längsführung"?
+#### Was ist "Random Walk"? Wo kann es eingesetzt werden?
+Ein Random Walk in der Robotik und beim autonomen Fahren beschreibt eine zufällige Bewegung eines Roboters oder Fahrzeugs innerhalb eines gegebenen Raums. Dabei werden Bewegungen oder Entscheidungen ohne gezielte Planung oder Karteninformation getroffen, sondern rein basierend auf Zufallsprinzipien.
+
+Es könnte beim erkunden von unbekannten Gegenden eingesetzt werden.
+
+#### Was ist "Dead-Reckoning"? Was sind Nachteile dieses Verfahrens?
+Dead-Reckoning ist eine Navigationsmethode, bei der die aktuelle Position eines Fahrzeugs oder Roboters ausgehend von einer bekannten Startposition und unter Verwendung von Bewegungsinformationen (z. B. Geschwindigkeit, Richtung, Zeit) geschätzt wird.
+
+Nachteile:
+- Dead-Reckoning ist rein schätzungsbasiert und kann nicht feststellen, ob die Berechnung fehlerhaft ist.
+- Kleine Messfehler in den Sensoren summieren sich mit der Zeit, sodass die geschätzte Position zunehmend ungenauer wird.
+
+#### Welche Arten von Karten können in der Robotik unterschieden werden?
+- Line Maps (Linienkarten) – Beschreiben die Umgebung durch Linien, die aus Sensoren wie LIDAR oder Kameras extrahiert werden, ideal für Straßen- und Indoor-Navigation.
+- Metrical Maps (Metrische Karten) – Enthalten präzise geometrische Informationen in Form von Rasterkarten (z. B. Occupancy Grid) oder Vektorkarten für genaue Roboterlokalisierung.
+- Topological Maps (Topologische Karten) – Repräsentieren die Umgebung als Graph mit Knoten (wichtige Orte) und Kanten (Verbindungen) für effiziente Pfadplanung ohne genaue metrische Koordinaten.
+- Landmark-based Maps (Merkmalsbasierte Karten) – Nutzen markante Punkte (Landmarks) wie Verkehrszeichen, Gebäude oder WLAN-Signale zur Orientierung und Navigation ohne vollständige Kartenrekonstruktion.
+
+#### Was sind "HD-Maps"?
+
+#### Was ist "Quer-" und "Längsführung"?
+
 ### Questions II
-Was ist eine "Ackermann-Lenkung"?
-Was ist mit "Pure Pursuit" gemeint?
-Beschreiben Sie kurz ein alternatives Verfahren zu "Pure Pursuit"!
-Welche Verfahren zur Kommunikation zwischen Fahrzeugen und zwischen Fahrzeugen und Infrastruktur kennen Sie?
+#### Was ist eine "Ackermann-Lenkung"?
+
+#### Was ist mit "Pure Pursuit" gemeint?
+
+#### Beschreiben Sie kurz ein alternatives Verfahren zu "Pure Pursuit"!
+
+#### Welche Verfahren zur Kommunikation zwischen Fahrzeugen und zwischen Fahrzeugen und Infrastruktur kennen Sie?
+
 ### Questions III
-Was ist der Unterschied zwischen globaler und lokaler Navigation? Was ist mit Hindernisvermeidung gemeint?
-Beschreiben Sie die Pfadplanung mittels Dijkstra oder Greedy Best First Search!
-Was ist der Unterschied zwischen der Pfadplanung nach Dijkstra und mittels A*?
-Was ist der Vorteil von D* verglichen mit A*?
+#### Was ist der Unterschied zwischen globaler und lokaler Navigation? Was ist mit Hindernisvermeidung gemeint?
+
+#### Beschreiben Sie die Pfadplanung mittels Dijkstra oder Greedy Best First Search!
+
+#### Was ist der Unterschied zwischen der Pfadplanung nach Dijkstra und mittels A\*?
+
+#### Was ist der Vorteil von D* verglichen mit A\*?
+
 ### Questions IV
-Schauen Sie sich den zugehörigen Praktikumszettel an. Welche Erkenntnisse hatten Sie im Praktikum?
+#### Schauen Sie sich den zugehörigen Praktikumszettel an. Welche Erkenntnisse hatten Sie im Praktikum?
+- TODO
+
 ## Kapitel 5
 ### Questions I
-Welche rechtlichen Probleme gibt oder gab es im Zusammenhang mit dem autonomen Fahren?
-Kennen Sie ein Beispiel für Anpassung von Gesetzen für das autonome Fahren?
+#### Welche rechtlichen Probleme gibt oder gab es im Zusammenhang mit dem autonomen Fahren?
+
+#### Kennen Sie ein Beispiel für Anpassung von Gesetzen für das autonome Fahren?
+
 ## Kapitel 6
 ### Questions I
-Beschreiben Sie die Robotersteuerungsarchitekturen "Sense-Plan-Act"  und die  "Subsumption-Architektur"!
-Welche Funktion haben jeweils die Schichten der "3T-Architektur"?
-Was sind zwei verbreitete Kommunikationsvarianten der Middleware?
-Was sind "Verhalten" in der verhaltensbasierten Steuerung?
+#### Beschreiben Sie die Robotersteuerungsarchitekturen "Sense-Plan-Act"  und die  "Subsumption-Architektur"!
+
+#### Welche Funktion haben jeweils die Schichten der "3T-Architektur"?
+
+#### Was sind zwei verbreitete Kommunikationsvarianten der Middleware?
+
+#### Was sind "Verhalten" in der verhaltensbasierten Steuerung?
+
 ### Questions II
-Beschreiben Sie die "Behavioural Control"-Schicht!
-Beschreiben Sie die "Executive"-Schicht!
-Beschreiben Sie die "Planning"-Schicht!
-Was ist in der Robotik mit "deliberativer" und "reaktiver" Steuerung gemeint?
-Schauen Sie sich den zugehörigen Praktikumszettel an. Welche Erkenntnisse hatten Sie im Praktikum?
+#### Beschreiben Sie die "Behavioural Control"-Schicht!
+
+#### Beschreiben Sie die "Executive"-Schicht!
+
+#### Beschreiben Sie die "Planning"-Schicht!
+
+#### Was ist in der Robotik mit "deliberativer" und "reaktiver" Steuerung gemeint?
+
+#### Schauen Sie sich den zugehörigen Praktikumszettel an. Welche Erkenntnisse hatten Sie im Praktikum?
+- TODO
