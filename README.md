@@ -117,7 +117,7 @@ In der Robotik bezieht sich der Begriff "Kinematik" auf die Untersuchung der Bew
 
 #### Welche Stufen von Autonomie können nach SAE J3016 unterschieden werden?
 Level 0 bis Level 5 (6 Level)
-![SAE_J3016](media/SAE_J3016)
+![SAE_J3016](media/SAE_J3016.png)
 
 #### Welche Programme zur Verkehrssimulation kennen Sie?
 - Gazebo: commonly used with ROS, general 3D simulator incl. physics, no special focus on street env. / vehicles
