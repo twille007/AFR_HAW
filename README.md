@@ -365,10 +365,19 @@ Der D\*-Algorithmus (Dynamic A\*) ist eine Erweiterung von A\* und wird speziell
 ## Kapitel 5
 ### Questions I
 #### Welche rechtlichen Probleme gibt oder gab es im Zusammenhang mit dem autonomen Fahren?
+- Haftung war/ist ein Problem mit autonomen Fahren
+- Autonomes Fahren ist rechtlich noch nicht vollständig geklärt
+- Haftung, Datenschutz und ethische Entscheidungen sind zentrale Streitpunkte.
+- Deutschland hat mit dem Gesetz von 2021 einen Vorstoß gemacht, aber viele Fragen bleiben offen.
 
 #### Kennen Sie ein Beispiel für Anpassung von Gesetzen für das autonome Fahren?
+- Gesetz zum autonomen Fahren (2021) ermöglicht Fahrzeuge der Stufe 4 im öffentlichen Verkehr.
+- Erlaubt fahrerlose Fahrzeuge in definierten Betriebsbereichen.
+- Einführung des technischen Aufsehers, der das Fahrzeug aus der Ferne überwacht.
+- Klärt Haftung, Zulassung und Datenschutz für autonome Fahrzeuge.
+- Deutschland gehört zu den ersten Ländern mit einer gesetzlichen Regelung für Level-4-Fahrzeuge.
 
-## Kapitel 6
+## Kapitel 6 (optional)
 ### Questions I
 #### Beschreiben Sie die Robotersteuerungsarchitekturen "Sense-Plan-Act"  und die  "Subsumption-Architektur"!
 
