@@ -177,7 +177,7 @@ Level 0 bis Level 5 (6 Level)
 	- SLAM-Systeme nutzen eine Vielzahl von Sensoren (wie Kameras, LiDAR, Ultraschall, Inertialsensoren) und Algorithmen, um Daten über die Umgebung zu sammeln und zu verarbeiten. Diese Daten werden verwendet, um die Bewegungen des Roboters zu schätzen und gleichzeitig eine Karte der Umgebung zu generieren. Die Herausforderung bei SLAM besteht darin, die Ungewissheit und Ungenauigkeiten zu bewältigen, die mit der Messung und der Bewegung in einer unbekannten Umgebung einhergehen.
 
 #### ICP und RANSAC können innerhalb von SLAM verwendet werden. Beschreiben Sie beide grob.
-ICP wird hauptsächlich zur genauen Ausrichtung von Punktwolken genutzt, wenn eine gute Annäherung der Transformation existiert. RANSAC wird genutzt, um robuste Modelle trotz Ausreißern zu finden, z. B. zur Entfernung falscher Korrespondenzen in der Merkmalsextraktion.
+ICP (steht für Interative Closest Point) wird hauptsächlich zur genauen Ausrichtung von Punktwolken genutzt, wenn eine gute Annäherung der Transformation existiert. RANSAC wird genutzt, um robuste Modelle trotz Ausreißern zu finden, z. B. zur Entfernung falscher Korrespondenzen in der Merkmalsextraktion.
 
 ICP ist ein iterativer Algorithmus zur Registrierung von Punktwolken, d. h., er versucht, zwei Punktwolken (z. B. aus einem LiDAR-Sensor) möglichst gut aufeinander auszurichten.
 Funktionsweise von ICP:
