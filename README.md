@@ -301,11 +301,10 @@ Die Ackermann-Lenkung ist ein Lenkmechanismus, der dafür sorgt, dass sich die R
 - Dies wird durch die geometrische Anordnung der Lenkgestänge realisiert.
 
 #### Was ist mit "Pure Pursuit" gemeint?
-Pure Pursuit ist ein geometriebasierter Pfadverfolgungsalgorithmus, der häufig in autonomen Fahrzeugen und mobilen Robotern verwendet wird. Sein Hauptziel ist es, einen glatten, effizienten Pfad zu einem Zielpunkt zu generieren und zu verfolgen.
-- Anstatt direkt einer vordefinierten Trajektorie zu folgen, berechnet der Algorithmus einen dynamischen Zielpunkt auf dem Pfad, der sich mit der Bewegung des Fahrzeugs weiterentwickelt.
-- Das Fahrzeug passt seine Lenkung so an, dass es kontinuierlich auf diesen Punkt zusteuert.
-- Autonomes Fahren (Level 2-4) – Führt Fahrzeuge sanft durch vordefinierte Routen.
-- Er ist besonders gut für glatte, dynamische Steuerung, aber weniger präzise für enge Kurven oder komplexe Umgebungen.
+Pure Pursuit ist ein Algorithmus für die Bahnverfolgung, der häufig in autonomen Fahrzeugen und mobilen Robotern verwendet wird. Er dient dazu, ein Fahrzeug so zu steuern, dass es einer geplanten Trajektorie (Route) möglichst genau folgt. Statt direkt eine Steuerung für das gesamte Fahrzeug zu berechnen, verfolgt Pure Pursuit eine einfache Idee:
+1. Das Fahrzeug schaut sich einen "Lookahead-Punkt" auf der gewünschten Strecke an. Dieser Punkt liegt eine bestimmte Entfernung (Lookahead-Distanz) voraus.
+2. Es wird eine Kreisbahn bestimmt, die das Fahrzeug genau von seiner aktuellen Position durch diesen Punkt führt.
+3. Das Fahrzeug wird so gesteuert, dass es dieser Kreisbahn folgt.
 
 #### Beschreiben Sie kurz ein alternatives Verfahren zu "Pure Pursuit"!
 - Eine alternative Methode zu Pure Pursuit ist der Stanley Controller, der insbesondere von Google/Stanford für autonomes Fahren entwickelt wurde.
